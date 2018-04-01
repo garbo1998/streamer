@@ -3,12 +3,7 @@
 ffmpeg \
   -i `youtube-dl -f best -g "$VIDEO_URL"` \
   -pix_fmt yuv420p \
-  -r 30 \
-  -g 60 \
   -c:v libx264 \
   -c:a aac \
-  -ar 44100 \
-  -b:v 2500k \
-  -preset medium \
   -f flv "$RTMP_URL"
 
