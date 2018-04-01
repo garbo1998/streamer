@@ -9,5 +9,6 @@ ffmpeg \
   -pix_fmt yuv420p \
   -c:v libx264 \
   -c:a aac \
+  -preset ultrafast \
   -f flv "$RTMP_URL"
 
