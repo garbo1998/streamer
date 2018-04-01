@@ -1,0 +1,15 @@
+version: '2'
+services:
+  start:
+    build:
+      context: build
+    command: |
+      sh -c "
+        set -e
+        (cd /build && ./start)
+      "
+    volumes:
+      - .:/build
+    environment:
+      - VIDEO_URL:${VIDEO_URL}
+      - RTMP_URL:${RTMP_URL}
