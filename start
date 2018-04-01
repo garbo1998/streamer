@@ -1,13 +1,8 @@
 #!/bin/bash
 
 ffmpeg \
-  -i `youtube-dl -f best -g "$VIDEO_URL"` \
-  -pix_fmt yuv420p \
-  -c:v libx264 \
-  -c:a aac \
-  -rtbufsize 100M \
-  -maxrate 2M \
-  -b:v 2M \
-  -preset ultrafast \
-  -f flv "$RTMP_URL"
-
+	-an \
+	-f lavfi -i life=s=300x200:mold=10:r=60:ratio=0.1:death_color=#C83232:life_color=#00ff00,scale=1280:720:flags=16 \
+	-ignore_loop 0 -i nyan.gif -filter_complex "[0][1]overlay=0:10" \
+	-vcodec libx264 -pix_fmt yuv420p -preset medium -r 30 -g 60 -b:v 1000k \
+        -f flv "$RTMP_URL"
