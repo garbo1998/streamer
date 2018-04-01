@@ -1,8 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -ex
+
+SERVER=rtmp://stream.younow.com/liveapp
+KEY=42864489_1_69336ceecb8a368133eab29e9216efb8
 
 ffmpeg \
-	-an \
-	-f lavfi -i life=s=300x200:mold=10:r=60:ratio=0.1:death_color=#C83232:life_color=#00ff00,scale=1280:720:flags=16 \
-	-ignore_loop 0 -i nyan.gif -filter_complex "[0][1]overlay=0:10" \
+        -i `youtube-dl -f best -g https://www.youtube.com/watch?v=GSb6eDzAWtE` \
+        -i banana.gif -filter_complex "[0][1]overlay=0:10" \
 	-vcodec libx264 -pix_fmt yuv420p -preset medium -r 30 -g 60 -b:v 1000k \
-        -f flv "$RTMP_URL"
+        -f flv "$SERVER/$KEY"
