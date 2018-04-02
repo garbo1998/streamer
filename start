@@ -10,6 +10,6 @@ ffmpeg \
         -map 0:1 \
         -map 1 \
 	-acodec libmp3lame -ar 44100 -b:a 180k \
-	-vcodec libx264 -pix_fmt yuv420p -preset medium -r 30 -g 60 -b:v 800k \
+	-vcodec libx264 -pix_fmt yuv420p -preset ultrafast -r 15 -b:v 800k \
         -s 720x480 \
         -f flv "$RTMP_URL"
