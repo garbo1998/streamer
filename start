@@ -2,11 +2,8 @@
 
 set -ex
 
-SERVER=rtmp://stream.younow.com/liveapp
-KEY=42864489_1_69336ceecb8a368133eab29e9216efb8
-
 ffmpeg \
-	-i $(youtube-dl -f best --extract-audio -g https://www.youtube.com/watch?v=B9z8uau1LaI) \
+	-i $(youtube-dl -f best --extract-audio -g "$VIDEO_URL") \
   -f lavfi \
   -i mandelbrot \
   -vf "format=gbrp,split=4[a][b][c][d],[d]histogram=display_mode=0:level_height=244[dd],[a]waveform=m=1:d=0:r=0:c=7[aa],[b]waveform=m=0:d=0:r=0:c=7[bb],[c][aa]vstack[V],[bb][dd]vstack[V2],[V][V2]hstack" \
@@ -15,4 +12,4 @@ ffmpeg \
 	-acodec libmp3lame -ar 44100 -b:a 180k \
 	-vcodec libx264 -pix_fmt yuv420p -preset medium -r 30 -g 60 -b:v 800k \
         -s 720x480 \
-        -f flv "$SERVER/$KEY"
+        -f flv "$RTMP_URL"
