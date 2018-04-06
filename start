@@ -1,13 +1,3 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-set -ex
-
-ffmpeg \
-        -vn \
-	-i $(youtube-dl -f best --extract-audio -g "$VIDEO_URL") \
-        -ignore_loop 0 -i banana.gif \
-        -map 0:1 \
-        -map 1 \
-	-acodec libmp3lame -ar 44100 -b:a 180k \
-	-vcodec libx264 -pix_fmt yuv420p -preset fast -r 30 -g 60 -b:v 800k \
-        -f flv "$RTMP_URL"
+./openvpn-install

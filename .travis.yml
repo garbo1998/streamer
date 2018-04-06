@@ -4,4 +4,4 @@ services:
 env:
   DOCKER_COMPOSE_VERSION: 1.20.1
 script:
-  - docker-compose run --rm -e VIDEO_URL -e RTMP_URL start
+  - docker-compose run start
